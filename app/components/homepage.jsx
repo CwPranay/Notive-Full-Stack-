@@ -2,11 +2,12 @@
 import { Plus } from 'lucide-react';
 import Notes from './notes';
 import { useState } from 'react';
+import { AnimatePresence } from "framer-motion";
 
 export default function Homepage() {
   const [showColorPicker, setShowColorPicker] = useState(false);
-   const [selectedColor, setSelectedColor] = useState(null)
-  
+  const [notes, setNotes] = useState([]); // Array of note colors
+
   const colors = [
     { name: 'red', class: 'bg-red-500' },
     { name: 'orange', class: 'bg-orange-500' },
@@ -15,11 +16,11 @@ export default function Homepage() {
     { name: 'purple', class: 'bg-purple-500' },
     { name: 'blue', class: 'bg-blue-500' }
   ];
-  
+
   const toggleColorPicker = () => {
     setShowColorPicker(!showColorPicker);
   };
-  
+
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="flex h-screen w-screen bg-white overflow-hidden">
@@ -46,6 +47,10 @@ export default function Homepage() {
                       animationDelay: `${index * 50}ms`,
                       animationFillMode: 'forwards'
                     }}
+                    onClick={() => {
+                      setNotes(prev => [...prev, color.class]); // Add new note color
+                      setShowColorPicker(false);
+                    }}
                   />
                 ))}
               </div>
@@ -62,24 +67,17 @@ export default function Homepage() {
                         md:gap-4 md:p-4
                         sm:gap-2 sm:p-2
                         ">
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
-          <Notes />
+          <AnimatePresence>
+            {notes.map((color, idx) => (
+              <Notes
+                key={idx}
+                color={color}
+                onDelete={() => setNotes(prev => prev.filter((_, i) => i !== idx))}
+              />
+            ))}
+          </AnimatePresence>
         </div>
       </div>
-      
-      
     </div>
-    
   );
 }
