@@ -16,8 +16,6 @@ export default function Notes({ color, onDelete, initialContent = "", onSave }: 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-    // This ref helps prevent calling onSave when initialContent updates
-    // if the content hasn't truly been edited by the user yet.
     const hasUserEditedRef = useRef(false);
 
     // 1. Initialize local content from prop and reset edit flag
@@ -53,7 +51,6 @@ export default function Notes({ color, onDelete, initialContent = "", onSave }: 
         }
 
         // Cleanup function for the debounced timer
-        // Important: We do NOT call onSave here. The onBlur handler handles the final save.
         return () => {
             if (saveTimerRef.current) {
                 clearTimeout(saveTimerRef.current);
@@ -73,7 +70,6 @@ export default function Notes({ color, onDelete, initialContent = "", onSave }: 
     const handleBlur = () => {
         setIsEditing(false);
         // When blurring, if the user has made changes, force an immediate save.
-        // This ensures the last state is saved reliably when editing stops.
         if (hasUserEditedRef.current) {
             onSave(content);
             hasUserEditedRef.current = false; // Reset after saving
@@ -114,7 +110,7 @@ export default function Notes({ color, onDelete, initialContent = "", onSave }: 
                 aria-label="Delete note"
                 type="button"
             >
-                <Trash2 size={18} />
+                <Trash2 size={18}  />
             </button>
             {/* Note content */}
             {isEditing ? (
@@ -122,13 +118,15 @@ export default function Notes({ color, onDelete, initialContent = "", onSave }: 
                     ref={textareaRef}
                     value={content}
                     onChange={handleChange}
-                    onBlur={handleBlur} // The primary trigger for final save on exit
-                    className="w-full h-full p-3 bg-transparent resize-none outline-none text-white overflow-auto scrollbar-hide"
+                    onBlur={handleBlur}
+                    // Apply font-sans to ensure Work Sans is used
+                    className="w-full h-full p-7 bg-transparent resize-none outline-none text-white overflow-auto scrollbar-hide font-sans"
                     placeholder="Write your note here..."
                 />
             ) : (
                 <div
-                    className="w-full h-full p-3 text-white overflow-auto break-words whitespace-pre-wrap cursor-text"
+                    // Apply font-sans to ensure Work Sans is used
+                    className="w-full h-full p-7 text-white overflow-auto break-words whitespace-pre-wrap cursor-text font-sans"
                 >
                     {content || "Click to add a note..."}
                 </div>
