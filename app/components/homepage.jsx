@@ -2,7 +2,7 @@
 import { Plus } from 'lucide-react';
 import Notes from './notes';
 import { useState } from 'react';
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Homepage() {
   const [showColorPicker, setShowColorPicker] = useState(false);
@@ -22,6 +22,9 @@ export default function Homepage() {
   };
 
   const [isHovered, setIsHovered] = useState(false);
+  const [noteToDelete, setNoteToDelete] = useState(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
   return (
     <div className="flex h-screen w-screen bg-white overflow-hidden">
       <div className="w-[110px] border-r border-gray-400 p-4 flex flex-col">
@@ -72,12 +75,61 @@ export default function Homepage() {
               <Notes
                 key={idx}
                 color={color}
-                onDelete={() => setNotes(prev => prev.filter((_, i) => i !== idx))}
+                onDelete={() => {
+                  setNoteToDelete(idx);
+                  setShowDeleteDialog(true);
+                }}
               />
             ))}
           </AnimatePresence>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showDeleteDialog && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{
+              opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+              scale: { type: "spring", duration: 0.6, bounce: 0.2 },
+            }}
+            className="fixed inset-0 flex items-center justify-center  z-50"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{
+                opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                scale: { type: "spring", duration: 0.6, bounce: 0.2 },
+              }}
+              className="bg-white rounded-lg shadow-lg p-6 min-w-[260px]"
+            >
+              <div className="mb-4 text-lg font-semibold text-gray-800">Delete this note?</div>
+              <div className="flex justify-end gap-8">
+                <button
+                  className="px-4 py-2 rounded bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-700"
+                  onClick={() => setShowDeleteDialog(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 rounded cursor-pointer bg-gray-800 hover:bg-gray-600 text-white"
+                  onClick={() => {
+                    setNotes(prev => prev.filter((_, i) => i !== noteToDelete));
+                    setShowDeleteDialog(false);
+                    setNoteToDelete(null);
+                  }}
+                >
+                  Confirm
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

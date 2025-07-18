@@ -1,8 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
+import { useEffect,useState,useRef } from "react";
 import { Trash2 } from "lucide-react";
 
 export default function Notes({ color, onDelete }) {
+
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
