@@ -5,6 +5,7 @@ import { ModeToggle } from './mode-toggle';
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
+import LoadingThreeDotsPulse from './ui/LoadingThreeDotsPulse';
 
 interface NoteItem {
   id: string;
@@ -67,7 +68,7 @@ export default function Homepage() {
     fetchNotes();
   }, [deviceId]);
 
-console.log("🟢 Device ID:", deviceId);
+
 
 
   const toggleColorPicker = () => setShowColorPicker(!showColorPicker);
@@ -125,27 +126,27 @@ console.log("🟢 Device ID:", deviceId);
   };
 
 
- const handleSaveNote = useCallback(async (id: string, newContent: string) => {
-  try {
-    const res = await fetch(`/api/notes`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ noteId: id, content: newContent }), // 🔧 changed from "id" to "noteId"
-    });
+  const handleSaveNote = useCallback(async (id: string, newContent: string) => {
+    try {
+      const res = await fetch(`/api/notes`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ noteId: id, content: newContent }), // 🔧 changed from "id" to "noteId"
+      });
 
-    if (!res.ok) throw new Error("Failed to update note");
+      if (!res.ok) throw new Error("Failed to update note");
 
-    setNotes((prevNotes) =>
-      prevNotes.map((note) =>
-        note.id === id ? { ...note, content: newContent } : note
-      )
-    );
-  } catch (error) {
-    console.error("Error saving note:", error);
-  }
-}, []);
+      setNotes((prevNotes) =>
+        prevNotes.map((note) =>
+          note.id === id ? { ...note, content: newContent } : note
+        )
+      );
+    } catch (error) {
+      console.error("Error saving note:", error);
+    }
+  }, []);
 
   ;
 
@@ -206,20 +207,26 @@ console.log("🟢 Device ID:", deviceId);
         <div className="flex-1 overflow-y-auto flex flex-wrap gap-[2%] p-8 content-start
                         md:gap-4 md:p-4
                         sm:gap-2 sm:p-2">
-          <AnimatePresence>
-            {notes.map((note) => (
-              <Notes
-                key={note.id}
-                color={note.color}
-                initialContent={note.content}
-                onDelete={() => {
-                  setNoteIdToDelete(note.id);
-                  setShowDeleteDialog(true);
-                }}
-                onSave={(newContent) => handleSaveNote(note.id, newContent)}
-              />
-            ))}
-          </AnimatePresence>
+          {loading ? (
+            <div className="w-full h-full flex justify-center items-center">
+              <LoadingThreeDotsPulse />
+            </div>
+          ) : (
+            <AnimatePresence>
+              {notes.map((note) => (
+                <Notes
+                  key={note.id}
+                  color={note.color}
+                  initialContent={note.content}
+                  onDelete={() => {
+                    setNoteIdToDelete(note.id);
+                    setShowDeleteDialog(true);
+                  }}
+                  onSave={(newContent) => handleSaveNote(note.id, newContent)}
+                />
+              ))}
+            </AnimatePresence>)
+          }
         </div>
       </div>
 
