@@ -23,12 +23,12 @@ export default function Homepage() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const colors = [
-    { name: 'red', class: 'bg-red-500' },
-    { name: 'orange', class: 'bg-orange-500' },
-    { name: 'green', class: 'bg-green-500' },
-    { name: 'yellow', class: 'bg-yellow-500' },
-    { name: 'purple', class: 'bg-purple-500' },
-    { name: 'blue', class: 'bg-blue-500' }
+    { name: 'green', class: 'bg-[#60D394]' },
+    { name: 'orange', class: 'bg-[#FF8966]' },
+    { name: 'pink', class: 'bg-[#FF6F91]' },
+    { name: 'yellow', class: 'bg-[#FFCB61]' },
+    { name: 'purple', class: 'bg-[#A07BEF]' },
+    { name: 'blue', class: 'bg-[#77BEF0]' }
   ];
 
   useEffect(() => {
@@ -151,7 +151,7 @@ export default function Homepage() {
   ;
 
   return (
-    <div className="flex h-screen w-screen bg-white dark:bg-gray-900/40 overflow-hidden transition-colors duration-300">
+    <div className="flex h-screen w-screen bg-[#ECF8FF] dark:bg-[#151A24] overflow-hidden transition-colors duration-300">
       {/* Sidebar */}
       <div className="w-[110px] border-r border-gray-400 dark:border-gray-700 p-4 flex flex-col justify-between items-center">
         {/* Add Button */}
