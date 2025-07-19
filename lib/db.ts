@@ -13,9 +13,11 @@ const connectDB= async () => {
         return;
     }
     try{
-        await mongoose.connect(MongoDB_URL,{dbName:"notesApp"});
-        isConnected = true;
-        console.log("MongoDB connected successfully");
+        await  mongoose.connect(process.env.MONGODB_URL!)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err.message);
+  });
 
 
     }

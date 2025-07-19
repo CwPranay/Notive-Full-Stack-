@@ -1,15 +1,19 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface INote extends Document {
   deviceId: string;
   content?: string;
+  color?: string;
   createdAt: Date;
 }
 
 const noteSchema: Schema = new Schema<INote>({
   deviceId: { type: String, required: true },
   content: { type: String, default: "" },
+  color: { type: String, default: "bg-white" },
   createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.models.note || mongoose.model<INote>("note", noteSchema);
+// prevent model overwrite error in development
+const Note = mongoose.models.Note || mongoose.model<INote>("Note", noteSchema);
+export default Note;

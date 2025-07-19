@@ -2,7 +2,7 @@
 import { Plus } from 'lucide-react';
 import Notes from './notes';
 import { ModeToggle } from './mode-toggle';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,6 +13,8 @@ interface NoteItem {
 }
 
 export default function Homepage() {
+  const [deviceId, setDeviceId] = useState("");
+  const [loading, setLoading] = useState(true);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [notes, setNotes] = useState<NoteItem[]>([]);
   const [isHovered, setIsHovered] = useState(false);
@@ -28,33 +30,124 @@ export default function Homepage() {
     { name: 'blue', class: 'bg-blue-500' }
   ];
 
+  useEffect(() => {
+    let storedId = localStorage.getItem("deviceId");
+
+    if (!storedId) {
+      storedId = uuidv4(); // generate new unique ID
+      localStorage.setItem("deviceId", storedId);
+    }
+
+    setDeviceId(storedId);
+  }, []);
+
+  useEffect(() => {
+    if (!deviceId) return;
+
+    const fetchNotes = async () => {
+      try {
+        const res = await fetch(`/api/notes?deviceId=${deviceId}`);
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          console.error("❌ API Error Response:", errorData);
+          throw new Error(errorData?.error || "Failed to fetch notes");
+        }
+
+        const data = await res.json();
+        setNotes(data);
+      } catch (err) {
+        console.error("❌ Fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+
+    fetchNotes();
+  }, [deviceId]);
+
+console.log("🟢 Device ID:", deviceId);
+
+
   const toggleColorPicker = () => setShowColorPicker(!showColorPicker);
 
-  const addNote = (colorClass: string) => {
-    const newNote: NoteItem = {
-      id: uuidv4(),
-      color: colorClass,
-      content: ''
-    };
-    setNotes(prev => [...prev, newNote]);
-    setShowColorPicker(false);
-  };
+  const addNote = async (colorClass: string) => {
+    try {
+      const res = await fetch("/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          deviceId,
+          color: colorClass,
+        }),
+      });
 
-  const handleDeleteNote = () => {
-    if (noteIdToDelete !== null) {
-      setNotes(prevNotes => prevNotes.filter(note => note.id !== noteIdToDelete));
-      setShowDeleteDialog(false);
-      setNoteIdToDelete(null);
+      if (!res.ok) throw new Error("Failed to create note");
+
+      const newNote = await res.json();
+
+      setNotes((prev) => [
+        ...prev,
+        {
+          id: newNote._id,
+          color: newNote.color,
+          content: newNote.content || "",
+        },
+      ]);
+      setShowColorPicker(false);
+    } catch (error) {
+      console.error("Error adding note:", error);
     }
   };
 
-  const handleSaveNote = useCallback((id: string, newContent: string) => {
-    setNotes(prevNotes =>
-      prevNotes.map(note =>
+
+  const handleDeleteNote = async () => {
+    if (!noteIdToDelete) return;
+
+    try {
+      const res = await fetch(`/api/notes?id=${noteIdToDelete}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete note");
+
+      setNotes((prevNotes) =>
+        prevNotes.filter((note) => note.id !== noteIdToDelete)
+      );
+      setShowDeleteDialog(false);
+      setNoteIdToDelete(null);
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  };
+
+
+ const handleSaveNote = useCallback(async (id: string, newContent: string) => {
+  try {
+    const res = await fetch(`/api/notes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ noteId: id, content: newContent }), // 🔧 changed from "id" to "noteId"
+    });
+
+    if (!res.ok) throw new Error("Failed to update note");
+
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
         note.id === id ? { ...note, content: newContent } : note
       )
     );
-  }, []);
+  } catch (error) {
+    console.error("Error saving note:", error);
+  }
+}, []);
+
+  ;
 
   return (
     <div className="flex h-screen w-screen bg-white dark:bg-gray-900/40 overflow-hidden transition-colors duration-300">
@@ -95,7 +188,7 @@ export default function Homepage() {
         <div className="mt-auto mb-2">
           <div
             className="w-10 h-10  flex items-center justify-center cursor-pointer text-white transition-colors"
-            
+
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >

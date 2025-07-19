@@ -1,74 +1,113 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import connectDB from '@/lib/db';
-import Note, { INote } from '@/models/note';
+import type { NextApiRequest, NextApiResponse } from "next";
+import connectDB from "@/lib/db";
+import Note from "@/models/note";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connectDB();
 
-  // POST: Create a note
-  if (req.method === 'POST') {
-    try {
-      const { deviceId,  content } = req.body;
+  // GET: Fetch notes by deviceId
+ if (req.method === "GET") {
+  const { deviceId } = req.query;
 
-      if (!deviceId)  {
-        return res.status(400).json({ error: 'deviceId are required' });
-      }
-
-      const newNote: INote = new Note({
-        deviceId,
-        
-        content,
-        createdAt: new Date(),
-        
-      });
-
-      const savedNote = await newNote.save();
-      return res.status(201).json(savedNote);
-    } catch (error) {
-      console.error('Error creating note:', error);
-      return res.status(500).json({ error: 'Failed to create note' });
-    }
+  if (!deviceId || typeof deviceId !== "string") {
+    return res.status(400).json({ error: "Missing or invalid deviceId" });
   }
 
-  // GET: Fetch notes
-  if (req.method === 'GET') {
-    try {
-      const { deviceId } = req.query;
+  try {
+    const notes = await Note.find({ deviceId });
 
-      if (!deviceId || typeof deviceId !== 'string') {
-        return res.status(400).json({ error: 'Invalid or missing deviceId' });
-      }
+    const mappedNotes = notes.map(note => ({
+      ...note.toObject(),
+      id: note._id.toString(),
+    }));
 
-      const notesList = await Note.find({ deviceId }).sort({ createdAt: -1 });
-      return res.status(200).json(notesList);
-    } catch (error) {
-      console.error('Error fetching notes:', error);
-      return res.status(500).json({ error: 'Failed to fetch notes' });
-    }
+    return res.status(200).json(mappedNotes);
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to fetch notes" });
+  }
+}
+
+
+  // POST: Create a new empty note
+ if (req.method === "POST") {
+  const { deviceId, color } = req.body;
+
+  if (!deviceId) {
+    return res.status(400).json({ error: "Missing deviceId" });
   }
 
-  // DELETE: Delete note by ID
-  if (req.method === 'DELETE') {
-    try {
-      const { id } = req.query;
+  try {
+    const newNote = await Note.create({
+      deviceId,
+      content: "",          // always empty at creation
+      color: color || "",   // optional
+      createdAt: new Date(),
+    });
 
-      if (!id || typeof id !== 'string') {
-        return res.status(400).json({ error: 'Invalid or missing note ID' });
-      }
+    const formattedNote = {
+      ...newNote.toObject(),
+      id: newNote._id.toString(),
+    };
 
-      const deletedNote = await Note.findByIdAndDelete(id);
+    return res.status(201).json(formattedNote);
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to create note" });
+  }
+}
 
-      if (!deletedNote) {
-        return res.status(404).json({ error: 'Note not found' });
-      }
 
-      return res.status(200).json({ message: 'Note deleted', deletedNote });
-    } catch (error) {
-      console.error('Error deleting note:', error);
-      return res.status(500).json({ error: 'Failed to delete note' });
-    }
+  // PUT: Update a note's content
+  if (req.method === "PUT") {
+  const { noteId, content } = req.body;
+
+  if (!noteId || typeof noteId !== "string") {
+    return res.status(400).json({ error: "Missing or invalid noteId" });
   }
 
-  // Unsupported method
-  return res.status(405).json({ error: 'Method Not Allowed' });
+  try {
+    const updatedNote = await Note.findByIdAndUpdate(
+      noteId,
+      { content },
+      { new: true }
+    );
+
+    if (!updatedNote) {
+      return res.status(404).json({ error: "Note not found" });
+    }
+
+    const formattedNote = {
+      ...updatedNote.toObject(),
+      id: updatedNote._id.toString(),
+    };
+
+    return res.status(200).json(formattedNote);
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to update note" });
+  }
+}
+
+if (req.method === "DELETE") {
+  const { id } = req.query;
+
+  if (!id || typeof id !== "string") {
+    return res.status(400).json({ error: "Missing or invalid noteId" });
+  }
+
+  try {
+    const deletedNote = await Note.findByIdAndDelete(id);
+
+    if (!deletedNote) {
+      return res.status(404).json({ error: "Note not found" });
+    }
+
+    return res.status(200).json({ message: "Note deleted successfully", id: id });
+    console.log("Deleting note:", id);
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to delete note" });
+  }
+
+}
+
+
+  return res.status(405).json({ error: "Method not allowed" });
 }
