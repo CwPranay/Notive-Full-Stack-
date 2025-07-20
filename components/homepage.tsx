@@ -5,13 +5,21 @@ import { ModeToggle } from './mode-toggle';
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
+import { Patrick_Hand } from 'next/font/google';
 import LoadingThreeDotsPulse from './ui/LoadingThreeDotsPulse';
 
 interface NoteItem {
   id: string;
   color: string;
   content: string;
+
 }
+
+const patrick = Patrick_Hand({
+  subsets: ['latin'],
+  weight: '400',
+});
+
 
 export default function Homepage() {
   const [deviceId, setDeviceId] = useState("");
@@ -21,6 +29,7 @@ export default function Homepage() {
   const [isHovered, setIsHovered] = useState(false);
   const [noteIdToDelete, setNoteIdToDelete] = useState<string | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
 
   const colors = [
     { name: 'green', class: 'bg-[#60D394]' },
@@ -151,6 +160,7 @@ export default function Homepage() {
   ;
 
   return (
+
     <div className="flex h-screen w-screen bg-[#ECF8FF] dark:bg-[#151A24] overflow-hidden transition-colors duration-300">
       {/* Sidebar */}
       <div className="w-[110px] border-r border-gray-400 dark:border-gray-700 p-4 flex flex-col justify-between items-center">
@@ -201,7 +211,19 @@ export default function Homepage() {
       {/* Notes area */}
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <div className="flex h-[100px] p-8 flex-shrink-0 justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-600 dark:text-gray-200">Notive</h1>
+          <div className="bg-yellow-200 w-fit px-4 py-2 rotate-[-2deg] shadow-lg">
+            <h1 className={`${patrick.className} text-3xl text-black`}>
+              Notive
+            </h1>
+
+
+          </div>
+           
+
+
+
+
+
         </div>
 
         <div className="flex-1 overflow-y-auto flex flex-wrap gap-[2%] p-8 content-start
