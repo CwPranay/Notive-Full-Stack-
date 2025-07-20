@@ -1,151 +1,173 @@
-Got it — from your screenshot, it looks like:
+<div align="center">
 
-* The GitHub README is **rendering markdown literally** (e.g. triple backticks visible)
-* The link isn’t clickable in an attractive way
-* The formatting doesn't feel polished or readable
+  <br/>
+  <h1 align="center">📝 Notive</h1>
+  <p align="center">
+    A minimal, distraction-free note-taking app designed for speed and simplicity.
+    <br />
+    <a href="https://notive-active-notes.vercel.app/" target="_blank"><strong>View Live Demo »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/CwPranay/Notive-Full-Stack/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/CwPranay/Notive-Full-Stack/issues">Request Feature</a>
+  </p>
+</div>
 
-Let me fix that for you.
-
----
-
-## ✅ Updated and Polished `README.md` (GitHub-Friendly)
-
-````markdown
-# 📝 Notive
-
-**Notive** is a minimal, distraction-free note-taking app built with **Next.js**, **Tailwind CSS**, **MongoDB**, **shadcn/ui**, and **Framer Motion**.  
-It helps you quickly jot down thoughts with a fast, elegant, and responsive UI.
-
-🔗 **Live Demo**: [notive-active-notes.vercel.app]
-(https://notive-active-notes.vercel.app)
-
----
-
-## ✨ Features
-
-- 🧠 Minimal & distraction-free interface
-- 💾 Auto-save notes by device ID
-- 🌗 Dark mode support
-- 🎨 Built with shadcn/ui components
-- 🌀 Framer Motion for smooth animations
-- 📱 Mobile-friendly and responsive
-- ⚡ Powered by Next.js App Router
+<div align="center">
+  <img src="https://img.shields.io/github/stars/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="Stars">
+  <img src="https://img.shields.io/github/forks/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="Forks">
+  <img src="https://img.shields.io/github/license/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/github/issues/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="Issues">
+</div>
 
 ---
 
-## 🛠 Tech Stack
-
-- **Framework**: Next.js (App Router)
-- **Styling**: Tailwind CSS, shadcn/ui
-- **Animations**: Framer Motion
-- **Database**: MongoDB via Mongoose
-- **API**: RESTful API with API Routes
+<p align="center">
+  <a href="https://notive-active-notes.vercel.app/" target="_blank">
+    <img src="./public/notive-preview.png" alt="Notive App Preview" width="80%">
+  </a>
+</p>
 
 ---
 
-## 📦 Installation
+## ✨ About The Project
 
-```bash
-git clone https://github.com/CwPranay/Notive-Full-Stack.git
-cd Notive-Full-Stack
-npm install
-````
+**Notive** was born from the need for a simple, beautiful, and fast note-taking experience. In a world of bloated software, Notive brings you back to the basics, focusing on the one thing that matters: capturing your thoughts.
 
----
+It leverages a modern tech stack to provide a seamless, auto-saving, and aesthetically pleasing interface that works beautifully on any device.
 
-## ⚙️ Environment Setup
+### Key Features
 
-Create a `.env.local` file in the root:
-
-```env
-MONGODB_URL=your_mongodb_connection_string
-```
+* ✅ **Minimal & Distraction-Free UI**: A clean canvas for your ideas.
+* 💾 **Seamless Auto-Save**: Notes are saved instantly by device ID.
+* 🌗 **Gorgeous Dark Mode**: Easy on the eyes, day or night.
+* 🎨 **Modern Component Library**: Built with the popular **shadcn/ui**.
+* 🌀 **Fluid Animations**: Smooth transitions powered by **Framer Motion**.
+* 📱 **Fully Responsive**: Perfect for desktop, tablet, and mobile.
+* ⚡ **Blazing Fast**: Built on the **Next.js App Router**.
 
 ---
 
-## 🧱 Run Locally
+## 🛠️ Built With
 
-```bash
-npm run dev
-```
+This project showcases a modern full-stack TypeScript architecture.
 
-App runs locally at: [http://localhost:3000](http://localhost:3000)
-
----
-
-## 📦 Dependencies
-
-Be sure these packages are installed:
-
-```bash
-npm install @shadcn/ui framer-motion lucide-react class-variance-authority tailwind-merge
-```
-
-To initialize `shadcn/ui` (if not already):
-
-```bash
-npx shadcn-ui@latest init
-```
+| Tech          | Description                               |
+|---------------|-------------------------------------------|
+| **Frontend** | Next.js, React, Tailwind CSS, shadcn/ui   |
+| **Animation** | Framer Motion                             |
+| **Backend** | Next.js API Routes (RESTful)              |
+| **Database** | MongoDB with Mongoose ORM                 |
+| **Deployment**| Vercel                                    |
 
 ---
 
-## 📁 Folder Structure
+## 🚀 Getting Started
 
-```
-/app
-/components
-  ├─ homepage.tsx
-  ├─ notes.tsx
-/lib
-/models
-  └─ Note.ts
-/pages
-  └─ api/notes.ts
-/public
-/styles
-```
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Make sure you have Node.js (v18.x or higher) and npm installed on your machine.
+
+### Installation & Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/CwPranay/Notive-Full-Stack.git](https://github.com/CwPranay/Notive-Full-Stack.git)
+    ```
+
+2.  **Navigate to the project directory:**
+    ```bash
+    cd Notive-Full-Stack
+    ```
+
+3.  **Install NPM packages:**
+    ```bash
+    npm install
+    ```
+
+4.  **Set up your environment variables:**
+    Create a `.env.local` file in the root of your project and add your MongoDB connection string.
+    ```env
+    # .env.local
+    MONGODB_URL="your_mongodb_connection_string"
+    ```
+
+5.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result!
 
 ---
 
-## 📸 Screenshot
+## 🔌 API Endpoints
 
-<!-- Replace with a real image -->
+The application uses the following RESTful API endpoints:
 
-![Notive Preview]
-(./public/notive-preview.png)
-
----
-
-## 🔮 Upcoming Features
-
-* 🔍 Search and tag notes
-* 🧾 Markdown support
-* 📲 PWA offline access
-* 🧠 AI-powered note summaries
-* 🔐 Optional user login
+| Method   | Endpoint          | Description                                  |
+|----------|-------------------|----------------------------------------------|
+| `GET`    | `/api/notes`      | Fetches all notes for a given `deviceId`.    |
+| `POST`   | `/api/notes`      | Creates a new note.                          |
+| `PUT`    | `/api/notes/[id]` | Updates an existing note by its ID.          |
+| `DELETE` | `/api/notes/[id]` | Deletes a note by its ID.                    |
 
 ---
 
-## 👤 Author
+## 🔮 Roadmap
 
-Made with ❤️ by [Pranay Gurav](https://github.com/CwPranay)
+We have exciting plans for the future of Notive!
+
+- [ ] 🔍 Search and Tagging System
+- [ ] 🧾 Full Markdown Support
+- [ ] 📲 PWA for Offline Access
+- [ ] 🔐 User Authentication (Email/Password & OAuth)
+- [ ] 🧠 AI-Powered Note Summaries
+
+See the [open issues](https://github.com/CwPranay/Notive-Full-Stack/issues) for a full list of proposed features (and known issues).
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ---
 
 ## 📜 License
 
-[MIT License](LICENSE)
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 👤 Author
+
+**Pranay Gurav**
+
+* **GitHub**: [@CwPranay](https://github.com/CwPranay)
+* **Portfolio**: [pranaygurav.vercel.app](https://pranaygurav.vercel.app/)
 
 ---
 
 ## 🙌 Acknowledgements
+
+A special thank you to the creators and maintainers of these incredible tools that made Notive possible.
 
 * [Next.js](https://nextjs.org/)
 * [Tailwind CSS](https://tailwindcss.com/)
 * [shadcn/ui](https://ui.shadcn.com/)
 * [Framer Motion](https://www.framer.com/motion/)
 * [MongoDB](https://www.mongodb.com/)
+* [Vercel](https://vercel.com/)
+* [Lucide Icons](https://lucide.dev/)
 
 ```
-
----
