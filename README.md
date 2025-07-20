@@ -1,55 +1,53 @@
-Perfect! Since your **Notive** app is live at `https://notive-active-notes.vercel.app/`, here’s your **final, copy-paste-ready `README.md`** — clean, professional, and tailored for GitHub.
+Got it — from your screenshot, it looks like:
+
+* The GitHub README is **rendering markdown literally** (e.g. triple backticks visible)
+* The link isn’t clickable in an attractive way
+* The formatting doesn't feel polished or readable
+
+Let me fix that for you.
 
 ---
 
-## ✅ Final `README.md` for **Notive**
+## ✅ Updated and Polished `README.md` (GitHub-Friendly)
 
 ````markdown
 # 📝 Notive
 
 **Notive** is a minimal, distraction-free note-taking app built with **Next.js**, **Tailwind CSS**, **MongoDB**, **shadcn/ui**, and **Framer Motion**.  
-It's fast, clean, and saves your notes automatically — organized by device ID.
+It helps you quickly jot down thoughts with a fast, elegant, and responsive UI.
 
-🌐 **Live Demo:** 
-[https://notive-active-notes.vercel.app]
+🔗 **Live Demo**: [notive-active-notes.vercel.app]
+(https://notive-active-notes.vercel.app)
 
 ---
 
 ## ✨ Features
 
-- 🧠 Clean, distraction-free UI
-- 💾 Auto-save notes per device (device ID–based)
-- 🌙 Dark mode support
-- 🎨 Built with shadcn/ui
-- 🌀 Framer Motion transitions
-- 📱 Responsive design
-- ⚡ Fast & SEO-friendly via Next.js App Router
+- 🧠 Minimal & distraction-free interface
+- 💾 Auto-save notes by device ID
+- 🌗 Dark mode support
+- 🎨 Built with shadcn/ui components
+- 🌀 Framer Motion for smooth animations
+- 📱 Mobile-friendly and responsive
+- ⚡ Powered by Next.js App Router
 
 ---
 
 ## 🛠 Tech Stack
 
-| Frontend         | Backend             | Database |
-|------------------|----------------------|----------|
-| Next.js 14+      | Node.js API Routes   | MongoDB  |
-| Tailwind CSS     | RESTful APIs         | Mongoose |
-| shadcn/ui        |                      |          |
-| Framer Motion    |                      |          |
-
----
-
-## 🚀 Live Preview
-
-🔗 [**Click here to try Notive live**]
-(https://notive-active-notes.vercel.app)
+- **Framework**: Next.js (App Router)
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Animations**: Framer Motion
+- **Database**: MongoDB via Mongoose
+- **API**: RESTful API with API Routes
 
 ---
 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/notive.git
-cd notive
+git clone https://github.com/CwPranay/Notive-Full-Stack.git
+cd Notive-Full-Stack
 npm install
 ````
 
@@ -71,7 +69,23 @@ MONGODB_URL=your_mongodb_connection_string
 npm run dev
 ```
 
-The app will be running at: [http://localhost:3000](http://localhost:3000)
+App runs locally at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 📦 Dependencies
+
+Be sure these packages are installed:
+
+```bash
+npm install @shadcn/ui framer-motion lucide-react class-variance-authority tailwind-merge
+```
+
+To initialize `shadcn/ui` (if not already):
+
+```bash
+npx shadcn-ui@latest init
+```
 
 ---
 
@@ -83,7 +97,6 @@ The app will be running at: [http://localhost:3000](http://localhost:3000)
   ├─ homepage.tsx
   ├─ notes.tsx
 /lib
-  └─ db.ts
 /models
   └─ Note.ts
 /pages
@@ -94,49 +107,38 @@ The app will be running at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📦 Required Dependencies
+## 📸 Screenshot
 
-Install these if they’re not already in your project:
+<!-- Replace with a real image -->
 
-```bash
-npm install @shadcn/ui framer-motion lucide-react class-variance-authority tailwind-merge
-```
-
-Initialize shadcn/ui (if not already):
-
-```bash
-npx shadcn-ui@latest init
-```
+![Notive Preview]
+(./public/notive-preview.png)
 
 ---
 
 ## 🔮 Upcoming Features
 
-* 🔍 Tags and search
+* 🔍 Search and tag notes
 * 🧾 Markdown support
-* 🧠 AI summaries (optional)
-* 📲 PWA support for offline notes
-* 🧑‍💻 User auth with cross-device sync
+* 📲 PWA offline access
+* 🧠 AI-powered note summaries
+* 🔐 Optional user login
 
 ---
 
-## 📸 Screenshots
+## 👤 Author
 
-<!-- Add image to `/public/notive-preview.png` if you have one -->
-
-![Screenshot](./public/preview.png)
+Made with ❤️ by [Pranay Gurav](https://github.com/CwPranay)
 
 ---
 
-## 👨‍💻 Author
+## 📜 License
 
-Made with ❤️ by [Pranay Gurav](https://github.com/cwpranay)
+[MIT License](LICENSE)
 
 ---
 
-
-
-## 🙏 Acknowledgements
+## 🙌 Acknowledgements
 
 * [Next.js](https://nextjs.org/)
 * [Tailwind CSS](https://tailwindcss.com/)
@@ -144,4 +146,6 @@ Made with ❤️ by [Pranay Gurav](https://github.com/cwpranay)
 * [Framer Motion](https://www.framer.com/motion/)
 * [MongoDB](https://www.mongodb.com/)
 
+```
 
+---
