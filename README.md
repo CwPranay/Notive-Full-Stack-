@@ -3,7 +3,7 @@
   <br/>
   <h1 align="center">📝 Notive</h1>
   <p align="center">
-    A minimal, distraction-free note-taking app designed for speed and simplicity.
+    An app for actively capturing short notes and fleeting ideas.
     <br />
     <a href="https://notive-active-notes.vercel.app/" target="_blank"><strong>View Live Demo »</strong></a>
     <br />
@@ -14,12 +14,6 @@
   </p>
 </div>
 
-<div align="center">
-  <img src="https://img.shields.io/github/stars/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="Stars">
-  <img src="https://img.shields.io/github/forks/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="Forks">
-  <img src="https://img.shields.io/github/license/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/github/issues/CwPranay/Notive-Full-Stack?style=for-the-badge" alt="Issues">
-</div>
 
 ---
 
@@ -33,9 +27,7 @@
 
 ## ✨ About The Project
 
-**Notive** was born from the need for a simple, beautiful, and fast note-taking experience. In a world of bloated software, Notive brings you back to the basics, focusing on the one thing that matters: capturing your thoughts.
-
-It leverages a modern tech stack to provide a seamless, auto-saving, and aesthetically pleasing interface that works beautifully on any device.
+**Notive** is built for **active note-taking**—the process of quickly jotting down short-form ideas, tasks, and reminders the moment they strike. It was born from the need for a simple and beautiful tool that prioritizes speed over feature bloat, helping you capture thoughts before they disappear.
 
 ### Key Features
 
@@ -53,10 +45,10 @@ It leverages a modern tech stack to provide a seamless, auto-saving, and aesthet
 
 This project showcases a modern full-stack TypeScript architecture.
 
-| Tech          | Description                               |
-|---------------|-------------------------------------------|
+| Tech         | Description                               |
+|--------------|-------------------------------------------|
 | **Frontend** | Next.js, React, Tailwind CSS, shadcn/ui   |
-| **Animation** | Framer Motion                             |
+| **Animation**| Framer Motion                             |
 | **Backend** | Next.js API Routes (RESTful)              |
 | **Database** | MongoDB with Mongoose ORM                 |
 | **Deployment**| Vercel                                    |
@@ -83,19 +75,30 @@ Make sure you have Node.js (v18.x or higher) and npm installed on your machine.
     cd Notive-Full-Stack
     ```
 
-3.  **Install NPM packages:**
+3.  **Install base NPM packages:**
     ```bash
     npm install
     ```
 
-4.  **Set up your environment variables:**
+4.  **Install UI & Animation Dependencies:**
+    ```bash
+    npm install framer-motion lucide-react class-variance-authority tailwind-merge
+    ```
+
+5.  **Initialize `shadcn/ui`:**
+    Run this command and follow the on-screen prompts.
+    ```bash
+    npx shadcn-ui@latest init
+    ```
+
+6.  **Set up your environment variables:**
     Create a `.env.local` file in the root of your project and add your MongoDB connection string.
     ```env
     # .env.local
     MONGODB_URL="your_mongodb_connection_string"
     ```
 
-5.  **Run the development server:**
+7.  **Run the development server:**
     ```bash
     npm run dev
     ```
@@ -121,11 +124,11 @@ The application uses the following RESTful API endpoints:
 
 We have exciting plans for the future of Notive!
 
-- [ ] 🔍 Search and Tagging System
-- [ ] 🧾 Full Markdown Support
-- [ ] 📲 PWA for Offline Access
-- [ ] 🔐 User Authentication (Email/Password & OAuth)
-- [ ] 🧠 AI-Powered Note Summaries
+-   [ ] 🔍 Search and Tagging System
+-   [ ] 🧾 Full Markdown Support
+-   [ ] 📲 PWA for Offline Access
+-   [ ] 🔐 User Authentication (Email/Password & OAuth)
+-   [ ] 🧠 AI-Powered Note Summaries
 
 See the [open issues](https://github.com/CwPranay/Notive-Full-Stack/issues) for a full list of proposed features (and known issues).
 
@@ -154,7 +157,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 **Pranay Gurav**
 
 * **GitHub**: [@CwPranay](https://github.com/CwPranay)
-* **Portfolio**: [pranaygurav.vercel.app](https://pranaygurav.vercel.app/)
+* **Portfolio**: [pranay gurav](https://pranay-gurav.vercel.app/)
 
 ---
 
@@ -169,5 +172,3 @@ A special thank you to the creators and maintainers of these incredible tools th
 * [MongoDB](https://www.mongodb.com/)
 * [Vercel](https://vercel.com/)
 * [Lucide Icons](https://lucide.dev/)
-
-```
