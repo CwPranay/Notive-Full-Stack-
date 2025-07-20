@@ -47,7 +47,7 @@ export default function Notes({ color, onDelete, initialContent = "", onSave }: 
                 onSave(content);
                 // After saving, reset hasUserEditedRef as the content is now "saved"
                 hasUserEditedRef.current = false;
-            }, 500);
+            }, 1000);
         }
 
         // Cleanup function for the debounced timer
