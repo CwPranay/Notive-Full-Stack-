@@ -10,7 +10,8 @@ Perfect! Since your **Notive** app is live at `https://notive-active-notes.verce
 **Notive** is a minimal, distraction-free note-taking app built with **Next.js**, **Tailwind CSS**, **MongoDB**, **shadcn/ui**, and **Framer Motion**.  
 It's fast, clean, and saves your notes automatically — organized by device ID.
 
-🌐 **Live Demo:** [https://notive-active-notes.vercel.app](https://notive-active-notes.vercel.app)
+🌐 **Live Demo:** 
+[https://notive-active-notes.vercel.app]
 
 ---
 
@@ -39,7 +40,8 @@ It's fast, clean, and saves your notes automatically — organized by device ID.
 
 ## 🚀 Live Preview
 
-🔗 [**Click here to try Notive live**](https://notive-active-notes.vercel.app)
+🔗 [**Click here to try Notive live**]
+(https://notive-active-notes.vercel.app)
 
 ---
 
@@ -142,7 +144,4 @@ Made with ❤️ by [Pranay Gurav](https://github.com/cwpranay)
 * [Framer Motion](https://www.framer.com/motion/)
 * [MongoDB](https://www.mongodb.com/)
 
-```
-
----
 
