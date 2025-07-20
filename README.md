@@ -19,7 +19,7 @@
 
 <p align="center">
   <a href="https://notive-active-notes.vercel.app/" target="_blank">
-    <img src="./public/notive-preview.png" alt="Notive App Preview" width="80%">
+    <img src="./public/preview.png" alt="Notive App Preview" width="80%">
   </a>
 </p>
 
